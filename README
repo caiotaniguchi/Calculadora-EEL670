@@ -1,2 +1,15 @@
-13/04/2012
-Testando o git, repositório ainda vazio
+"userInterface.h"
+namespace userInterface
+{	
+	std::string input (void);
+	void output (std::string str);
+}
+
+
+"stringError.h"
+namespace stringError
+{
+	std::string messages(int error);
+	bool treatment (std::string input);
+}
+
