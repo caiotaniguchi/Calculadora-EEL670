@@ -1,7 +1,5 @@
 #include <string>
 
-
-
 namespace userInterface
 {	
 	std::string input (void);

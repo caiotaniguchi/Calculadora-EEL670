@@ -1,4 +1,5 @@
 #include "userInterface.h"
+#include "stringCalc.h"
 
 using namespace std;
 
@@ -11,6 +12,6 @@ int main (void)
 	{	
 		str = userInterface::input();
 		if (str != "")
-			userInterface::output(str);	
+			userInterface::output(stringCalc(str));	
 	} while (i == true);
 }

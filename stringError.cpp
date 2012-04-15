@@ -29,7 +29,7 @@ bool stringError::treatment (string input)
 		    && (input[i] != '=') && (input[i] != '+') && (input[i] != '-')
 		    && (input[i] != '*') && (input[i] != '/') && (input[i] != '^')
 		    && (input[i] != '.') && (input[i] != '(') && (input[i] != ')')
-		    && (input[i] != '%'))
+		    && (input[i] != '%') && (input[i] != ';'))
 		{		
 			cout << ">> " << stringError::messages(1) << endl;
 			return false;
@@ -37,19 +37,20 @@ bool stringError::treatment (string input)
 
 	// verifies if the first character is alphanumeric, space, '-' or '('
 	if ((!isalnum(input[0])) && (!isspace(input[0]))
-	    && (input[0] != '(') && (input[0] != '-') && (input[0] != '\n'))
+	    && (input[0] != '(') && (input[0] != '-') && (input[0] != '\0'))
 	{		
 		cout << ">> " << stringError::messages(2) << endl;
 		return false;
 	}
 
 	// verifies if the last character is alphanumeric, space, ';' or ')'
-	if (!(isalnum(input[i-1])) && !(isspace(input[i-1]))
-	    && (input[i-1] != ';') && (input[i-1] != ')'))
-	{		
-		cout << ">> " << stringError::messages(3) << endl;
-		return false;
-	}
+	if (i != 0)	
+		if (!(isalnum(input[i-1])) && !(isspace(input[i-1]))
+	 		&& (input[i-1] != ';') && (input[i-1] != ')'))
+		{		
+			cout << ">> " << stringError::messages(3) << endl;
+			return false;
+		}
 
 	// verifies if all brackets are closed
 	int bracketCtrl = 0;

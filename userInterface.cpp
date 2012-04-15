@@ -2,6 +2,7 @@
 
 #include "userInterface.h"
 #include "stringError.h"
+#include "stringCalc.h"
 
 using namespace std;
 
