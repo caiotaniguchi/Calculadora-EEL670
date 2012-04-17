@@ -11,19 +11,18 @@ string stringError::messages(int error)
 		case 1:
 			return "Invalid character";
 		case 2:
-			return "Only alphanumeric characters and '(' can begin a sentence";
+			return "Only alphanumeric characters '-' or '(' can begin a sentence";
 		case 3:
-			return "Only alphanumeric characters, ';' and ')' can end a sentence";
-		case 4:
-			return "There are brackets missing";
+			return "Only alphanumeric characters, ';' or ')' can end a sentence";			
 	};
+	return "There are brackets missing";
 }
 
 
 bool stringError::treatment (string input)
 {
 	// search for invalid characters
-	int i = 0;
+	unsigned i = 0;
 	for (; i < input.length(); i++)
 		if (!(isalnum(input[i])) && (!(isspace(input[i]))) && (input[i] != ':')
 		    && (input[i] != '=') && (input[i] != '+') && (input[i] != '-')

@@ -1,12 +1,12 @@
 CC=g++
-EXEC=calculator
-OBJS=calculator.o userInterface.o stringError.o stringCalc.o
-#CODE=calculator.cpp userInterface.cpp stringError.cpp stringCalc.cpp
+EXEC=main
+OBJS=main.o userInterface.o stringError.o stringCalc.o
+#CODE=main.cpp userInterface.cpp stringError.cpp stringCalc.cpp
 FLAGS=-W -Wall
 
 all: $(EXEC)
 
-calculator: $(OBJS)
+main: $(OBJS)
 	$(CC) -o $@ $^
 
 %.o: %.cpp
@@ -15,6 +15,6 @@ calculator: $(OBJS)
 clean:
 	rm -rf *.o
 
-cleanall:
+cleanAll:
 	rm -rf $(EXEC) *.o *~ 
 
