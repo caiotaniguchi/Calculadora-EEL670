@@ -5,12 +5,23 @@ namespace userInterface
 	void output (std::string str);
 }
 
-
 "stringError.h"
 namespace stringError
 {
 	std::string messages(int error);
 	bool treatment (std::string input);
+}
+
+"functionSelector.h"
+std::string functionSelector(std::string);
+
+"commands.h"
+namespace commands
+{
+	void exitMain (void);
+	std::string help (void);
+	std::string spreadsheet (void);
+	std::string remove (std::string input);
 }
 
 "stringCalc.h"

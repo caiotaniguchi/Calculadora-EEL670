@@ -2,27 +2,27 @@
 
 #include "userInterface.h"
 #include "stringError.h"
-#include "stringCalc.h"
+#include "functionSelector.h"
 
 using namespace std;
 
-//The Function gets a string from the keyboard.
-//If not successfull, displays an error message
+// The Function gets a string from the keyboard and
+// evaluates if it's a command or a math expression.
+// If not successfull, displays an error message
 string userInterface::input (void)
 {
-	string str;
+	string inputString;
 	
 	cout << ">> ";
-	getline(cin,str);
+	getline(cin,inputString);
 
-	if (stringError::treatment (str))
-		return str;
+	if (stringError::treatment (inputString))
+		return functionSelector(inputString);
 	return "";
-	//return functionSelector(str);
 }
 
-//displays the result
-void userInterface::output (string str)
+//displays a string
+void userInterface::output (string outputString)
 {
-	cout << ">> " << str << endl;
+	cout << ">> " << outputString << endl;
 }
