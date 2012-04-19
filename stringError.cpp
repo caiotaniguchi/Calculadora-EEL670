@@ -1,6 +1,8 @@
 #include <iostream>
+#include <boost/regex.hpp>
 
 #include "stringError.h"
+#include "userInterface.h"
 
 using namespace std;
 
@@ -15,45 +17,39 @@ string stringError::messages(int error)
 		case 3:
 			return "Only alphanumeric characters, ';' or ')' can end a sentence";			
 	};
-	return "There are brackets missing";
+	return "There are parens missing";
 }
 
 
 bool stringError::treatment (string input)
 {
-	// search for invalid characters
-	unsigned i = 0;
-	for (; i < input.length(); i++)
-		if (!(isalnum(input[i])) && (!(isspace(input[i]))) && (input[i] != ':')
-		    && (input[i] != '=') && (input[i] != '+') && (input[i] != '-')
-		    && (input[i] != '*') && (input[i] != '/') && (input[i] != '^')
-		    && (input[i] != '.') && (input[i] != '(') && (input[i] != ')')
-		    && (input[i] != '%') && (input[i] != ';'))
-		{		
-			cout << ">> " << stringError::messages(1) << endl;
-			return false;
-		}
-
-	// verifies if the first character is alphanumeric, space, '-' or '('
-	if ((!isalnum(input[0])) && (!isspace(input[0]))
-	    && (input[0] != '(') && (input[0] != '-') && (input[0] != '\0'))
-	{		
-		cout << ">> " << stringError::messages(2) << endl;
+	// searches for invalid characters
+	boost::regex validChars("([[:alnum:]]|[[:space:]]|[:=,\\+,\\-,\\*,/,%,\\^,\\.,\\(,\\),;])*");
+	if (!boost::regex_match(input, validChars))
+	{	
+		userInterface::output (stringError::messages(1));
 		return false;
 	}
 
-	// verifies if the last character is alphanumeric, space, ';' or ')'
-	if (i != 0)	
-		if (!(isalnum(input[i-1])) && !(isspace(input[i-1]))
-	 		&& (input[i-1] != ';') && (input[i-1] != ')'))
-		{		
-			cout << ">> " << stringError::messages(3) << endl;
-			return false;
-		}
+	// verifies if the first character is alphanumeric, '-' or '('
+	boost::regex validFirstChar("([[:alnum:]]|\\(|\\-)[[:print:]]*");	
+	if (!boost::regex_match(input, validFirstChar))
+	{	
+		userInterface::output (stringError::messages(2));
+		return false;
+	}
+
+	// verifies if the last character is alphanumeric, ';' or ')'
+	boost::regex validLastChar("[[:print:]]*([[:alnum:]]|\\)|;)");	
+	if (!boost::regex_match(input, validLastChar))
+	{	
+		userInterface::output (stringError::messages(3));
+		return false;
+	}
 
 	// verifies if all brackets are closed
 	int bracketCtrl = 0;
-	for (i = 0; i < input.length(); i++)
+	for (unsigned i = 0; i < input.length(); i++)
 	{
 		if (input[i] == '(')
 			bracketCtrl++;
@@ -61,17 +57,17 @@ bool stringError::treatment (string input)
 			bracketCtrl--;
 		if (bracketCtrl < 0)
 		{		
-			cout << ">> " << stringError::messages(4) << endl;
+			userInterface::output (stringError::messages(4));
 			return false;
 		}
 	};
-
 	if (bracketCtrl != 0)
 	{		
-		cout << ">> " << stringError::messages(4) << endl;
+		userInterface::output (stringError::messages(4));
 		return false;
 	}
 
+	
 	return true;
 }
 

@@ -2,6 +2,7 @@
 #include <boost/regex.hpp>
 
 #include "stringError.h"
+#include "userInterface.h"
 
 using namespace std;
 
@@ -16,33 +17,33 @@ string stringError::messages(int error)
 		case 3:
 			return "Only alphanumeric characters, ';' or ')' can end a sentence";			
 	};
-	return "There are brackets missing";
+	return "There are parens missing";
 }
 
 
 bool stringError::treatment (string input)
 {
-	// search for invalid characters
+	// searches for invalid characters
 	boost::regex validChars("([[:alnum:]]|[[:space:]]|[:=,\\+,\\-,\\*,/,%,\\^,\\.,\\(,\\),;])*");
 	if (!boost::regex_match(input, validChars))
 	{	
-		cout << ">> " << stringError::messages(1) << endl;
+		userInterface::output (stringError::messages(1));
 		return false;
 	}
 
-	// verifies if the first character is alphanumeric, space, '-' or '('
+	// verifies if the first character is alphanumeric, '-' or '('
 	boost::regex validFirstChar("([[:alnum:]]|\\(|\\-)[[:print:]]*");	
 	if (!boost::regex_match(input, validFirstChar))
 	{	
-		cout << ">> " << stringError::messages(2) << endl;
+		userInterface::output (stringError::messages(2));
 		return false;
 	}
 
-	// verifies if the last character is alphanumeric, space, ';' or ')'
+	// verifies if the last character is alphanumeric, ';' or ')'
 	boost::regex validLastChar("[[:print:]]*([[:alnum:]]|\\)|;)");	
 	if (!boost::regex_match(input, validLastChar))
 	{	
-		cout << ">> " << stringError::messages(3) << endl;
+		userInterface::output (stringError::messages(3));
 		return false;
 	}
 
@@ -56,13 +57,13 @@ bool stringError::treatment (string input)
 			bracketCtrl--;
 		if (bracketCtrl < 0)
 		{		
-			cout << ">> " << stringError::messages(4) << endl;
+			userInterface::output (stringError::messages(4));
 			return false;
 		}
 	};
 	if (bracketCtrl != 0)
 	{		
-		cout << ">> " << stringError::messages(4) << endl;
+		userInterface::output (stringError::messages(4));
 		return false;
 	}
 

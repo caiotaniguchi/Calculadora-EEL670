@@ -14,22 +14,34 @@ void commands::exitMain (void)
 //shows help message
 string commands::help (void)
 {
-	return "string de ajuda";
+	userInterface::output ("");
+	userInterface::output ("List of commands:");
+	userInterface::output ("");
+	userInterface::output ("exit\t\t\texits the program");	
+	userInterface::output ("help\t\t\tshows this message");
+	userInterface::output ("list\t\t\tlists all the storaged variables and its current values");
+	userInterface::output ("remove <target>\tdeletes target variable");
+	userInterface::output ("");
+	userInterface::output ("Current program version suports the 4 basic operations with real");
+	userInterface::output ("numbers. It's also possible to assign values to variables using");
+	userInterface::output ("<variable> = <value>");
+	return "";
 }
 
 //prints a spreadsheet with all the
-//storaged variable
-string commands::spreadsheet (void)
+//storaged variables
+string commands::list (void)
 {
-	userInterface::output ("	variables		value");
-	userInterface::output ("     lista");
+	userInterface::output ("\tVariables\t\tValue");
+	userInterface::output ("");
+	userInterface::output ("lista");
 	return "";
 }
 
 //removes the target variable
 string commands::remove (string input)
 {
-	return "variavel removida";
+	return "variavel removida " + input;
 }
 
 
