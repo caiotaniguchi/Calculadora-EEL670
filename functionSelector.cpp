@@ -1,13 +1,15 @@
 #include <cstdlib>
 
 #include "functionSelector.h"
-#include "stringCalc.h"
 #include "commands.h"
+#include "varToNumber.h"
 
 using namespace std;
 
-string functionSelector(string input)
+std::string functionSelector(std::string input)
 {
+	if (input.find("clear") != string::npos)
+		return commands::clear();
 	if (input.find("exit") != string::npos)
 		commands::exitMain();
 	if (input.find("help") != string::npos)
@@ -16,5 +18,5 @@ string functionSelector(string input)
 		return commands::list();
 	if (input.find("remove") != string::npos)
 		return commands::remove(input);
-	return stringCalc(input);
+	return varToNumber::assignment(input);
 }

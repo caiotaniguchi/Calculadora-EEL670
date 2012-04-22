@@ -31,17 +31,18 @@ std::string stringCalc(std::string expression)
    std::string subExpression, subExpression2, result, result2;
    int startPos, endPos;
    double val1, val2;
+	
    
    do                    // Searches for (), calculates the expression inside, then
    {                     // replaces the () with the result. Will start from the
       startPos = -1;     // innermost (). Repeats until there are no more ().
       endPos = -1;
-      for(register int i = 0 ; i < expression.length() ; i++)
+      for(register int i = 0 ; unsigned(i) < expression.length() ; i++)
       {
          if (expression[i] == '(')
          {
             startPos = i;
-            for (register int j = i; j < expression.length() ; j++)
+            for (register int j = i; unsigned(j) < expression.length() ; j++)
             {
                if (expression[j] == ')')
                {
@@ -66,7 +67,7 @@ std::string stringCalc(std::string expression)
    do     // Searches for + and - then calculates the rest of the expression
    {      // Will calculate last the + or - that is most to the right
       startPos = -1;
-      for(register int i = 0 ; i < expression.length() ; i++)
+      for(register int i = 0 ; unsigned(i) < expression.length() ; i++)
       {
          if ((expression[i] == '+')||(expression[i] == '-'))
          {
@@ -84,7 +85,7 @@ std::string stringCalc(std::string expression)
                if(!isdigit(expression[startPos-1]))
                {
                   endPos = startPos;
-                  for(register int i = 0 ; i < startPos ; i++)
+                  for(register int i = 0 ; unsigned(i) < startPos ; i++)
                   {
                      if ((expression[i] == '+')||(expression[i] == '-'))
                      {
@@ -125,7 +126,7 @@ std::string stringCalc(std::string expression)
    do     // Searches for * and / then calculates the rest of the expression
    {      // Same logic as the +- block
       startPos = -1;
-      for(register int i = 0 ; i < expression.length() ; i++)
+      for(register int i = 0 ; unsigned(i) < expression.length() ; i++)
       {
          if ((expression[i] == '*')||(expression[i] == '/'))
          {

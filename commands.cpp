@@ -1,17 +1,26 @@
 #include <cstdlib>
+#include <iostream>
 
 #include "commands.h"
 #include "userInterface.h"
+#include "varManager.h"
 
 using namespace std;
 
-//exits the program
+string commands::clear (void)
+{
+	for (unsigned i = 0; i < 50; i++)
+		cout << endl;
+	return "";
+}
+
+
 void commands::exitMain (void)
 {
 	exit(0);	
 }
 
-//shows help message
+
 string commands::help (void)
 {
 	userInterface::output ("");
@@ -28,20 +37,34 @@ string commands::help (void)
 	return "";
 }
 
-//prints a spreadsheet with all the
-//storaged variables
 string commands::list (void)
 {
 	userInterface::output ("\tVariables\t\tValue");
 	userInterface::output ("");
-	userInterface::output ("lista");
+	varManager::varSpreadsheet();
 	return "";
 }
 
-//removes the target variable
+
 string commands::remove (string input)
 {
-	return "variavel removida " + input;
+	unsigned commandPos;
+	string variable;
+
+	commandPos = input.find("remove");
+	cout << commandPos << endl;	
+	unsigned j = 0;
+	for (unsigned i = (commandPos + 6); i < input.length(); i++)
+		if (!isspace(input[i]))
+		{
+			variable = input.substr(i);
+			break;
+		}
+	
+	userInterface::output (variable);
+	if (varManager::varRemove(variable))
+		return "variavel removida " + variable;
+	return "fail";
 }
 
 

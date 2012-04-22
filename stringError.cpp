@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cctype>
 #include <boost/regex.hpp>
 
 #include "stringError.h"
@@ -20,11 +20,11 @@ string stringError::messages(int error)
 	return "There are parens missing";
 }
 
-
 bool stringError::treatment (string input)
 {
+	
 	// searches for invalid characters
-	boost::regex validChars("([[:alnum:]]|[[:space:]]|[:=,\\+,\\-,\\*,/,%,\\^,\\.,\\(,\\),;])*");
+	boost::regex validChars("([[:alnum:]]|[[:space:]]|[=,\\+,\\-,\\*,/,%,\\^,\\.,\\(,\\),;])*");
 	if (!boost::regex_match(input, validChars))
 	{	
 		userInterface::output (stringError::messages(1));
