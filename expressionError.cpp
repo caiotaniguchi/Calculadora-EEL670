@@ -8,7 +8,7 @@ using namespace std;
 
 bool expressionError (string &expression)
 {
-	const string invalidExpression = "Invalid expression";
+	
 
 	//removes any spaces from the string
 	for (unsigned i = 0; i < expression.length(); i++)
@@ -19,14 +19,14 @@ bool expressionError (string &expression)
 		}
 
 	//checks if there is a variable on the left side of the assignment
-	for (unsigned i = 0; i < expression.length(); i++)
+	/*for (unsigned i = 0; i < expression.length(); i++)
 		if (expression[i] == '=')
 			for (unsigned j = 0; j < i; j++)
 				if (!isalpha(expression[j]))
 				{
 					userInterface::output (invalidExpression);
 					return false;
-				}
+				}*/
 
 	// searches for operators followed by open parens (eg. (*a+b+))
 	// and points not followed nor preceded by digits

@@ -5,4 +5,6 @@
 
 bool expressionError (std::string &);
 
+const std::string invalidExpression = "Invalid expression";
+
 #endif

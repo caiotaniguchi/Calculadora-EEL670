@@ -1,4 +1,4 @@
-#include "varToNumber.h"
+#include "varNumConversion.h"
 #include "stringCalc.h"
 #include "varManager.h"
 #include "userInterface.h"
@@ -6,7 +6,7 @@
 
 using namespace std;
 
-string varToNumber::assignment(string expression)
+string varNumConversion::numberToVar(string expression)
 {
 	
 	unsigned i = 0;
@@ -16,9 +16,28 @@ string varToNumber::assignment(string expression)
 	if (!expressionError (expression))
 		return "";	
 	
+	// searches for ';' and splits the expression in two or more
+	for (; i < expression.length(); i++)
+	{	
+		if (expression[i] == ';')
+		{
+			userInterface::output (varNumConversion::numberToVar(expression.substr(0,i)));
+			return varNumConversion::numberToVar(expression.substr(i+1));
+		}
+	}
+
+	for (unsigned j = 0; j < expression.length(); j++)
+		if (expression[j] == '=')
+			for (unsigned k = 0; k < j; k++)
+				if (!isalpha(expression[k]))
+				{
+					userInterface::output (invalidExpression);
+					return "";
+				}
+
 	// separates the assigned variable from the rest of
 	// the expression
-	for (; i < expression.length(); i++)
+	for (i = 0; i < expression.length(); i++)
 	{	
 		if (expression[i] == '=')
 		{
@@ -33,21 +52,21 @@ string varToNumber::assignment(string expression)
 	if (numberOfAssignments == 1)
 	{	
 		while (expression.compare("") != 0)
-			numericExpression += varToNumber::variableToNumber(expression);
+			numericExpression += varNumConversion::varToNumber(expression);
 		result = stringCalc(numericExpression);
 		varManager::varAssign(assignedVariable, strToDouble(result));
 	}
 	else
 	{
 		while (expression.compare("") != 0)
-			numericExpression += varToNumber::variableToNumber(expression);
+			numericExpression += varNumConversion::varToNumber(expression);
 		result = stringCalc(numericExpression);
 	}
 	return result;
 }
 
 
-string varToNumber::variableToNumber(string &expression)
+string varNumConversion::varToNumber(string &expression)
 {
 	const string varNotFound = "Variable(s) not found";
 	string var, newExpression, preVar;	

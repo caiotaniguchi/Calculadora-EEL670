@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <iostream>
 
 #include "commands.h"
 #include "userInterface.h"
@@ -10,7 +9,7 @@ using namespace std;
 string commands::clear (void)
 {
 	for (unsigned i = 0; i < 50; i++)
-		cout << endl;
+		userInterface::output ("");
 	return "";
 }
 
@@ -39,8 +38,8 @@ string commands::help (void)
 
 string commands::list (void)
 {
-	userInterface::output ("\tVariables\t\tValue");
 	userInterface::output ("");
+	userInterface::output ("\tVariables\t\tValue");
 	varManager::varSpreadsheet();
 	return "";
 }
@@ -52,8 +51,7 @@ string commands::remove (string input)
 	string variable;
 
 	commandPos = input.find("remove");
-	cout << commandPos << endl;	
-	unsigned j = 0;
+
 	for (unsigned i = (commandPos + 6); i < input.length(); i++)
 		if (!isspace(input[i]))
 		{
@@ -61,10 +59,9 @@ string commands::remove (string input)
 			break;
 		}
 	
-	userInterface::output (variable);
 	if (varManager::varRemove(variable))
-		return "variavel removida " + variable;
-	return "fail";
+		return "'" + variable + "'" + " was successfully removed";
+	return "Variable not found";
 }
 
 

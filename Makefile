@@ -1,6 +1,6 @@
 CC=g++
 EXEC=main
-OBJS=main.o userInterface.o functionSelector.o stringError.o commands.o varToNumber.o expressionError.o varManager.o stringCalc.o
+OBJS=main.o userInterface.o functionSelector.o stringError.o commands.o varNumConversion.o expressionError.o varManager.o stringCalc.o
 #CODE=main.cpp userInterface.cpp stringError.cpp stringCalc.cpp
 CFLAGS=-W -Wall -Wpointer-arith
 
