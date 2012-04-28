@@ -31,11 +31,13 @@ std::string stringCalc(std::string expression)
    std::string subExpression, subExpression2, result, result2;
    int startPos, endPos;
    double val1, val2;
-	
+
+   if (expression.compare(varNotFound) == 0)
+      return "";
    
-   do                    // Searches for (), calculates the expression inside, then
-   {                     // replaces the () with the result. Will start from the
-      startPos = -1;     // innermost (). Repeats until there are no more ().
+   do // Searches for (), calculates the expression inside, then
+   { // replaces the () with the result. Will start from the
+      startPos = -1; // innermost (). Repeats until there are no more ().
       endPos = -1;
       for(register int i = 0 ; unsigned(i) < expression.length() ; i++)
       {
@@ -52,10 +54,10 @@ std::string stringCalc(std::string expression)
             }
          }
       }
-      if (startPos != -1)   // () found
+      if (startPos != -1) // () found
       {
          subExpression = expression.substr(startPos+1, endPos-startPos-1);
-         result = stringCalc(subExpression);  // Calls same function with expression inside ()
+         result = stringCalc(subExpression); // Calls same function with expression inside ()
          expression.erase(startPos, endPos-startPos+1);
          expression.insert(startPos, result);
       }
@@ -64,8 +66,8 @@ std::string stringCalc(std::string expression)
    
    // At this point the expression will have no ( or ) and only numbers, +, -, *, /
    
-   do     // Searches for + and - then calculates the rest of the expression
-   {      // Will calculate last the + or - that is most to the right
+   do // Searches for + and - then calculates the rest of the expression
+   { // Will calculate last the + or - that is most to the right
       startPos = -1;
       for(register int i = 0 ; unsigned(i) < expression.length() ; i++)
       {
@@ -78,7 +80,7 @@ std::string stringCalc(std::string expression)
       if (startPos != -1)
       {
       
-         if(expression[startPos]=='-')   // Special case for negative numbers
+         if(expression[startPos]=='-') // Special case for negative numbers
          {
             if(startPos > 0)
             {
@@ -106,8 +108,8 @@ std::string stringCalc(std::string expression)
                       // Separates the 2 expressions before and after the + or -
          subExpression = expression.substr(0, startPos);
          subExpression2 = expression.substr(startPos+1, expression.length()-startPos);
-         result = stringCalc(subExpression);     // Calls the same function for
-         result2 = stringCalc(subExpression2);   // each of the new expressions
+         result = stringCalc(subExpression); // Calls the same function for
+         result2 = stringCalc(subExpression2); // each of the new expressions
          val1 = strToDouble(result);
          val2 = strToDouble(result2);
          if (expression[startPos] == '+')
@@ -123,8 +125,8 @@ std::string stringCalc(std::string expression)
    }
    while(startPos != -1);
    
-   do     // Searches for * and / then calculates the rest of the expression
-   {      // Same logic as the +- block
+   do // Searches for * and / then calculates the rest of the expression
+   { // Same logic as the +- block
       startPos = -1;
       for(register int i = 0 ; unsigned(i) < expression.length() ; i++)
       {
@@ -153,11 +155,6 @@ std::string stringCalc(std::string expression)
       }
    }
    while(startPos != -1);
-   
-   if (expression.length() == 0)  // If the expression is empty, assume 0
-   {                              // Used to calculate negative numbers
-      expression = "0";
-   }
-   
+  
    return expression;
 }

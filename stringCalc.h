@@ -3,10 +3,9 @@
 #ifndef STRING_CALC_H
 #define STRING_CALC_H "stringCalc.h"
 
+const std::string varNotFound = "Variable(s) not found";
 double strToDouble(std::string);
 std::string doubleToStr(double);
 std::string stringCalc(std::string);
-std::string variableToNumber(std::string &);
-std::string assignment(std::string);
 
 #endif
