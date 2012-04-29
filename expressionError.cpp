@@ -8,8 +8,6 @@ using namespace std;
 
 bool expressionError (string &expression)
 {
-	
-
 	//removes any spaces from the string
 	for (unsigned i = 0; i < expression.length(); i++)
 		if (isspace(expression[i]))
@@ -63,14 +61,6 @@ bool expressionError (string &expression)
 					return false;
 				}
 		}
-	
 	}
 	return true;
 }
-
-
-
-
-
-
-

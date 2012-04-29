@@ -16,8 +16,14 @@ namespace varManager
 	// Returns error code
 	bool varRemove(std::string);
 
+	// Prints a spreadsheet of the variables stored
 	void varSpreadsheet(void);
 
+	// Replaces a variable with its value in an expression
+	std::string varToNumber(std::string &);
+
+	// Assigns a value to a variable
+	std::string numberToVar(std::string);
 }
 
 struct varType{

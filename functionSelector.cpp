@@ -1,8 +1,6 @@
-//#include <cstdlib>
-
 #include "functionSelector.h"
 #include "commands.h"
-#include "varNumConversion.h"
+#include "varManager.h"
 
 using namespace std;
 
@@ -18,5 +16,5 @@ std::string functionSelector(std::string input)
 		return commands::list();
 	if (input.find("remove") != string::npos)
 		return commands::remove(input);
-	return varNumConversion::numberToVar(input);
+	return varManager::numberToVar(input);
 }

@@ -1,8 +1,8 @@
 CC=g++
 EXEC=main
-OBJS=main.o userInterface.o functionSelector.o stringError.o commands.o varNumConversion.o expressionError.o varManager.o stringCalc.o
-#CODE=main.cpp userInterface.cpp stringError.cpp stringCalc.cpp
-CFLAGS=-W -Wall -Wpointer-arith
+OBJS=main.o userInterface.o functionSelector.o stringError.o commands.o expressionError.o varManager.o stringCalc.o
+#-Wpointer-arith
+CFLAGS=-W -Wall
 
 all: $(EXEC)
 

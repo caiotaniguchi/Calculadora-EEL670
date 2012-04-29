@@ -66,8 +66,6 @@ bool stringError::treatment (string input)
 		userInterface::output (stringError::messages(4));
 		return false;
 	}
-
-	
 	return true;
 }
 
