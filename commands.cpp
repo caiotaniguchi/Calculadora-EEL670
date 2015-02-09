@@ -47,7 +47,7 @@ string commands::list (void)
 
 string commands::remove (string input)
 {
-	unsigned commandPos;
+	unsigned commandPos = 0;
 	string variable = "haha";
 
 	commandPos = input.find("remove");
