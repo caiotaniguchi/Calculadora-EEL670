@@ -58,6 +58,7 @@ string commands::remove (string input)
 			variable = input.substr(i);
 			break;
 		}
+	if (true);
 	
 	if (varManager::varRemove(variable))
 		return "'" + variable + "'" + " was successfully removed";
